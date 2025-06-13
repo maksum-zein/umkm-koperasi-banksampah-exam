@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMKM System</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            color: black;
+        }
+
+        header {
+            background-color: orange;
+            color: #010221;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 5px solid #0A7373;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        header p {
+            color: #2E86C1
+            margin-top: 0.5rem;
+            font-style: italic;                      
+        }
+
+        .page {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section {
+            background-color: #B7BF99;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 900px;
+            
+            
+        }
+
+        .desc {
+            margin-right: 10px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: black;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            color: black;
+        }
+
+        pre {
+            background-color:#D5E7F2;
+            padding: 1rem;
+            border-left: 4px solid orange;
+            overflow-x: auto;
+            border-radius: 4px;
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+
+        ul {
+            font-size: 1.1rem;
+        }
+
+        footer {
+            background-color: rgb(204, 209, 214);
+            color: #000000;
+            padding: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sistem Pengelolaan UMKM <br> Koperasi dan Bank Sampah</h1>
+    </header>
+    <div class="page">
+    <div class="section">
+        <h2>Query 1 - Membuat class UMKMSystem</h2>
+        <pre><code>
+class UMKMSystem:
+    def __init__(self, nama_umkm):
+        self.nama_umkm = nama_umkm
+        self.anggota = [] # List kosong untuk menyimpan data anggota
+        self.dana_pinjaman = 50_000_000  # Rp50 juta
+        </code></pre>
+        <div class="desc">
+        <p><strong>Penjelasan:</strong><br><ul>Membuat class UMKMSystem dengan atribut nama_umkm, anggota (list kosong untuk menyimpan data anggota), dan dana_pinjaman (set sebagai Rp50 juta).</ul></p>
+        </div>
+    </div>
+    <div class="section">
+        <h2>Query 2 - Menambah Anggota dan Pinjaman UMKM </h2>
+        <pre><code>
+ddef tambah_anggota(self, nama, pinjaman):
+        anggota = {
+            "nama": nama,
+            "pinjaman": pinjaman
+        }
+        self.anggota.append(anggota)
+        </code></pre>
+        <p><strong>Penjelasan:</strong><br><ul>Method untuk Menambah Anggota UMKM Setiap UMKM punya anggota yang akan menerima pinjaman. Kita perlu method untuk menambah anggota ke dalam sistem.</ul></p>
+    </div>    
+    </div>
+    <div class="section">
+        <h2>Query 3 - Method untuk Menghitung Pengembalian Pinjaman</h2>
+        <pre><code>
+    def hitung_pengembalian(self, nama, tahun):
+        for anggota in self.anggota:
+            if anggota["nama"] == nama:
+                pinjaman = anggota["pinjaman"]
+                bunga = 0.05 * tahun * pinjaman
+                return pinjaman + bunga
+        return None
+        </code></pre>
+        <p><strong>Penjelasan:</strong><br><ul>Method untuk Menghitung Pengembalian Pinjaman Setiap anggota harus mengembalikan pinjaman dengan bunga sederhana 5% per tahun.</ul></p>
+    </div>
+    <div class="section">
+        <h2>Query 4 - Membuat Class Koperasi</h2>
+        <pre><code>
+    class Koperasi(UMKMSystem):
+    def __init__(self, nama_umkm):
+        super().__init__(nama_umkm)
+        self.transaksi = []  # List untuk menyimpan transaksi anggota
+        </code></pre>
+        <p><strong>Penjelasan:</strong><br><ul>Membuat Class untuk Koperasi Selain UMKM, kita perlu class untuk mengelola koperasi desa yang akan mencatat transaksi anggota.</ul></p>
+    </div>
+    <div class="section">
+        <h2>Query 5 - Mencatat Transaksi Koperasi</h2>
+        <pre><code>
+     def catat_transaksi(self, nama, jenis, jumlah):
+        transaksi = {
+            "nama": nama,
+            "jenis": jenis,
+            "jumlah": jumlah
+        }
+        self.transaksi.append(transaksi)
+        </code></pre>
+        <p><strong>Penjelasan:</strong><br><ul>Method untuk Mencatat Transaksi Koperasi Koperasi akan mencatat transaksi setiap anggota, seperti pembelian barang atau pembayaran pinjaman.</ul></p>
+    </div>
+    <div class="section">
+        <h2>Query 6 - Menghitung Keuntungan Koperasi</h2>
+        <pre><code>
+    def hitung_keuntungan(self):
+        keuntungan = 0
+        for transaksi in self.transaksi:
+            if transaksi["jenis"] == "jual":
+                keuntungan += transaksi["jumlah"]
+            elif transaksi["jenis"] == "beli":
+                keuntungan -= transaksi["jumlah"]
+        return keuntungan
+        </code></pre>
+        <p><strong>Penjelasan:</strong><br><ul>Method untuk Menghitung Keuntungan Koperasi Koperasi akan menghitung keuntungan berdasarkan transaksi anggota.</ul></p>
+    </div>
+    <div class="section">
+        <h2>Query 7 - Class Bank Sampah</h2>
+        <pre><code>
+    class BankSampah(UMKMSystem):
+        def __init__(self, nama_umkm):
+            super().__init__(nama_umkm)
+            self.data_sampah = {}  # Dictionary untuk menyimpan data sampah anggota
+        </code></pre>
+        <p><strong>Penjelasan:</strong><br><ul>Membuat Class Bank Sampah yang mewarisi class UMKMSystem, dengan atribut tambahan variabel data sampah untuk menyimpan jenis dan jumlah sampah.</ul></p>
+    </div>
+    <div class="section">
+        <h2>Query 8 - Mencatat Data Bank Sampah</h2>
+        <pre><code>
+    def catat_sampah(self, nama, jenis_sampah, jumlah_kg):
+        if nama not in self.data_sampah:
+            self.data_sampah[nama] = {}
+        if jenis_sampah not in self.data_sampah[nama]:
+            self.data_sampah[nama][jenis_sampah] = 0
+        self.data_sampah[nama][jenis_sampah] += jumlah_kg
+        </code></pre>
+        <p><strong>Penjelasan:</strong><br><ul>Method untuk Mencatat Data Sampah Bank sampah akan mencatat jenis sampah dan jumlah yang dikumpulkan oleh anggota.</ul></p>
+    </div>
+    <div class="section">
+        <h2>Query 9 - Menghitung Nilai Tukar Sampah</h2>
+        <pre><code>
+    def hitung_nilai_tukar(self, nama):
+        nilai_per_kg = {
+            "plastik": 5000,
+            "kertas": 2000
+        }
+        total = 0
+        if nama in self.data_sampah:
+            for jenis, jumlah in self.data_sampah[nama].items():
+                harga = nilai_per_kg.get(jenis, 0)
+                total += jumlah * harga
+        return total
+        </code></pre>
+        <p><strong>Penjelasan:</strong><br><ul>Method untuk Menghitung Nilai Tukar Sampah Bank sampah akan menghitung nilai tukar sampah dalam rupiah berdasarkan jumlah yang dikumpulkan. method hitung_nilai_tukar ke class BankSampah. Method ini menghitung nilai tukar berdasarkan data sampah (misalnya, plastik Rp5000/kg, kertas Rp2000/kg).</ul></p>
+    </div>
+    <div class="section">
+        <h2>Query 10 - Memberikan pesan Edukasi Lingkungan</h2>
+        <pre><code>
+    def pesan_edukasi(self, nama):
+        total_kg = 0
+        if nama in self.data_sampah:
+            for jumlah in self.data_sampah[nama].values():
+                total_kg += jumlah
+
+        if total_kg >= 100:
+            return "Luar biasa! Anda adalah pahlawan lingkungan!"
+        elif total_kg >= 50:
+            return "Hebat! Terus kumpulkan dan daur ulang!"
+        elif total_kg > 0:
+            return "Ayo tingkatkan partisipasi untuk bumi yang lebih bersih!"
+        else:
+            return "Yuk mulai kumpulkan sampah dan peduli lingkungan!"</ul></p>
+            </code></pre>
+            <p><strong>Penjelasan:</strong><br><ul>Method untuk Pesan Edukasi Lingkungan Sistem ini juga akan memberikan pesan edukasi kepada masyarakat tentang pentingnya daur ulang.</ul></p>
+    </div>
+    <div class="section">
+        <h2>Query 11 - Mengintegrasikan Semua Komponen</h2>
+        <pre><code>
+    def menu_koperasi(koperasi):
+    while True:
+        print("\n--- MENU KOPERASI ---")
+        print("1. Tambah Anggota")
+        print("2. Catat Transaksi")
+        print("3. Kembali ke Menu Utama")
+        pilihan = input("Pilih opsi: ")
+
+        if pilihan == "1":
+            nama = input("Nama anggota: ")
+            pinjaman = int(input("Jumlah pinjaman (Rp): "))
+            koperasi.tambah_anggota(nama, pinjaman)
+        elif pilihan == "2":
+            nama = input("Nama anggota: ")
+            jenis = input("Jenis transaksi (beli/jual): ")
+            jumlah = int(input("Jumlah (Rp): "))
+            koperasi.catat_transaksi(nama, jenis, jumlah)
+        elif pilihan == "3":
+            break
+        else:
+            print("Pilihan tidak valid!")
+
+def menu_bank_sampah(bank_sampah):
+    while True:
+        print("\n--- MENU BANK SAMPAH ---")
+        print("1. Tambah Anggota")
+        print("2. Catat Sampah")
+        print("3. Kembali ke Menu Utama")
+        pilihan = input("Pilih opsi: ")
+
+        if pilihan == "1":
+            nama = input("Nama anggota: ")
+            pinjaman = int(input("Jumlah pinjaman (Rp): "))
+            bank_sampah.tambah_anggota(nama, pinjaman)
+        elif pilihan == "2":
+            nama = input("Nama anggota: ")
+            jenis = input("Jenis sampah (plastik/kertas/logam): ")
+            jumlah = float(input("Jumlah (kg): "))
+            bank_sampah.catat_sampah(nama, jenis, jumlah)
+        elif pilihan == "3":
+            break
+        else:
+            print("Pilihan tidak valid!")
+
+def menu_laporan(koperasi, bank_sampah):
+    print("\n--- LAPORAN UMKM ---")
+    for anggota in koperasi.anggota:
+        nama = anggota["nama"]
+        pinjaman = anggota["pinjaman"]
+        pengembalian = koperasi.hitung_pengembalian(nama, tahun=1)
+        nilai_tukar = bank_sampah.hitung_nilai_tukar(nama)
+        pesan = bank_sampah.pesan_edukasi(nama)
+
+        print(f"\nNama: {nama}")
+        print(f"- Pinjaman: Rp{pinjaman}")
+        print(f"- Pengembalian (1 tahun): Rp{pengembalian}")
+        print(f"- Nilai Tukar Sampah: Rp{nilai_tukar}")
+        print(f"- Pesan Edukasi: {pesan}")
+
+    print("\nTotal Keuntungan Koperasi: Rp", koperasi.hitung_keuntungan())
+
+def main():
+    print("=== SISTEM UMKM, KOPERASI, & BANK SAMPAH ===")
+    nama_umkm = input("Masukkan nama UMKM: ")
+
+    koperasi = Koperasi(nama_umkm)
+    bank_sampah = BankSampah(nama_umkm)
+
+    while True:
+        print("\n=== MENU UTAMA ===")
+        print("1. Modul Koperasi")
+        print("2. Modul Bank Sampah")
+        print("3. Tampilkan Laporan UMKM")
+        print("4. Keluar")
+        pilihan = input("Pilih menu: ")
+
+        if pilihan == "1":
+            menu_koperasi(koperasi)
+        elif pilihan == "2":
+            menu_bank_sampah(bank_sampah)
+        elif pilihan == "3":
+            menu_laporan(koperasi, bank_sampah)
+        elif pilihan == "4":
+            print("Terima kasih. Program selesai.")
+            break
+        else:
+            print("Pilihan tidak valid!")
+
+if __name__ == "__main__":
+    main()
+
+        </code></pre>
+        <h2>Output Demo:</h2>
+        <pre><code>
+    === SISTEM UMKM, KOPERASI, & BANK SAMPAH ===
+Masukkan nama UMKM: Usaha Sejahtera
+
+=== MENU UTAMA ===
+1. Modul Koperasi
+2. Modul Bank Sampah
+3. Tampilkan Laporan UMKM
+4. Keluar
+Pilih menu: 1
+
+--- MENU KOPERASI ---
+1. Tambah Anggota
+2. Catat Transaksi
+3. Kembali ke Menu Utama
+Pilih opsi: 1
+Nama anggota: Maksum
+Jumlah pinjaman (Rp): 1000000
+
+--- MENU KOPERASI ---
+1. Tambah Anggota
+2. Catat Transaksi
+3. Kembali ke Menu Utama
+Pilih opsi: 2
+Nama anggota: Maksum
+Jenis transaksi (beli/jual): beli
+Jumlah (Rp): 500000
+
+--- MENU KOPERASI ---
+1. Tambah Anggota
+2. Catat Transaksi
+3. Kembali ke Menu Utama
+Pilih opsi: 3
+
+=== MENU UTAMA ===
+1. Modul Koperasi
+2. Modul Bank Sampah
+3. Tampilkan Laporan UMKM
+4. Keluar
+Pilih menu: 2
+
+--- MENU BANK SAMPAH ---
+1. Catat Sampah
+2. Kembali ke Menu Utama
+Pilih opsi: 1
+Nama anggota: Maksum
+Jenis sampah (plastik/kertas): plastik
+Jumlah (kg): 50
+
+--- MENU BANK SAMPAH ---
+1. Catat Sampah
+2. Kembali ke Menu Utama
+Pilih opsi: 2
+
+=== MENU UTAMA ===
+1. Modul Koperasi
+2. Modul Bank Sampah
+3. Tampilkan Laporan UMKM
+4. Keluar
+Pilih menu: 3
+
+--- LAPORAN UMKM ---
+
+Nama: Maksum
+- Pinjaman: Rp1000000
+- Pengembalian (1 tahun): Rp1050000.0
+- Nilai Tukar Sampah: Rp250000.0
+- Pesan Edukasi: Hebat! Terus kumpulkan dan daur ulang!
+
+Total Keuntungan Koperasi: Rp 500000
+
+    </div>
+    </div>
+    <footer>
+        &copy;2025 Maksum
+    </footer>
+</body>
+</html>
