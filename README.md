@@ -1,3 +1,3 @@
 # umkm-koperasi-banksampah-exam
 
-Klik disini : [UMKM-Koperasi-BankSampah](https://github.com/maksum-zein/umkm-koperasi-banksampah-exam/blob/main/index.html)
+Klik disini : [UMKM-Koperasi-BankSampah](https://maksum-zein.github.io/umkm-koperasi-banksampah-exam/)
